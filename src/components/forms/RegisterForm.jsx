@@ -1,63 +1,66 @@
 "use client";
 import Navbar from "./../layouts/Navbar";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 
-const registerForm = () => {
+const RegisterForm = () => {
   const [modalMessage, setModalMessage] = useState("");
   const [showModal, setShowModal] = useState(false);
 
-  const handleSignUp = (e) => {
-    e.preventDefault();
-    const name = e.target.name.value;
-    const address = e.target.address.value;
-    const phone = e.target.phone.value;
-    const email = e.target.email.value;
-    const password = e.target.password.value;
-    e.target.reset();
+  const name = useRef();
+  const address = useRef();
+  const phone = useRef();
+  const email = useRef();
+  const password = useRef();
 
+  const handleSignUp = () => {
     const formData = {
-      name,
-      address,
-      phone,
-      email,
-      password,
+      name: name.current.value,
+      address: address.current.value,
+      phone: phone.current.value,
+      email: email.current.value,
+      password: password.current.value,
     };
 
     let existingUsers = [];
-    try {
-      const storedData = localStorage.getItem("loginData");
-      if (storedData) {
+    const storedData = localStorage.getItem("loginData");
+    if (storedData) {
+      try {
         existingUsers = JSON.parse(storedData);
-        if (!Array.isArray(existingUsers)) {
-          existingUsers = [];
-        }
+        if (!Array.isArray(existingUsers)) existingUsers = [];
+      } catch (err) {
+        console.error("Error parsing localStorage data:", err);
       }
-    } catch (err) {
-      console.error("Error parsing localStorage data:", err);
     }
 
     existingUsers.push(formData);
     localStorage.setItem("loginData", JSON.stringify(existingUsers));
+
     setModalMessage("Registration Successful");
     setShowModal(true);
+
+    name.current.value = "";
+    address.current.value = "";
+    phone.current.value = "";
+    email.current.value = "";
+    password.current.value = "";
   };
+
   return (
     <div>
       <Navbar />
-      <div className="flex  gap-8 justify-center items-center h-screen">
-        <div className="border lg:w-[500px] rounded-lg ml-5 mt-4 p-12 h-[500px] ">
-          <h2 className="text-4xl text-center my-4 text-[#444444] font-bold">
+      <div className="flex gap-8 justify-center items-center h-screen">
+        <div className="border lg:w-[500px] rounded-lg ml-5 mt-4 p-12 h-[500px] shadow-xl shadow-[#0cee97]">
+          <h2 className="text-4xl text-center my-4 text-[#04ac58] font-bold">
             SignUp
           </h2>
           <div className="ml-10 mt-4">
-            <form onSubmit={handleSignUp}>
+            <form>
               <div className="form-control my-3">
                 <label className="label">
-                  <span className="label-text text-base font-medium">
-                    Name{" "}
-                  </span>
+                  <span className="label-text text-base font-medium">Name</span>
                 </label>
                 <input
+                  ref={name}
                   type="text"
                   name="name"
                   placeholder="Name"
@@ -65,13 +68,15 @@ const registerForm = () => {
                   required
                 />
               </div>
+
               <div className="form-control my-3">
                 <label className="label">
                   <span className="label-text text-base font-medium">
-                    Address{" "}
+                    Address
                   </span>
                 </label>
                 <input
+                  ref={address}
                   type="text"
                   name="address"
                   placeholder="Address"
@@ -79,13 +84,15 @@ const registerForm = () => {
                   required
                 />
               </div>
+
               <div className="form-control my-3">
                 <label className="label">
                   <span className="label-text text-base font-medium">
-                    Phone{" "}
+                    Phone
                   </span>
                 </label>
                 <input
+                  ref={phone}
                   type="text"
                   name="phone"
                   placeholder="Phone"
@@ -97,14 +104,15 @@ const registerForm = () => {
               <div className="form-control ml-1 my-3">
                 <label className="label">
                   <span className="label-text text-base font-medium">
-                    Email{" "}
+                    Email
                   </span>
                 </label>
                 <input
+                  ref={email}
                   type="email"
                   name="email"
                   placeholder="email"
-                  className="input input-bordered border border-rose-100 rounded p-1 ml-9"
+                  className="input input-bordered border border-rose-100 rounded p-1 ml-[34px]"
                   required
                 />
               </div>
@@ -116,17 +124,19 @@ const registerForm = () => {
                   </span>
                 </label>
                 <input
+                  ref={password}
                   type="password"
                   name="password"
                   placeholder="password"
-                  className="input input-bordered border border-rose-100 rounded p-1 ml-3"
+                  className="input input-bordered border border-rose-100 rounded p-1 ml-2"
                   required
                 />
               </div>
 
               <div className="form-control mt-6">
                 <button
-                  type="submit"
+                  type="button"
+                  onClick={handleSignUp}
                   className="text-white bg-success box-border border border-transparent hover:bg-success-strong focus:ring-4 focus:ring-success-medium shadow-xs font-medium leading-5 rounded text-sm px-4 py-2.5 focus:outline-none"
                 >
                   SignUp
@@ -156,4 +166,4 @@ const registerForm = () => {
   );
 };
 
-export default registerForm;
+export default RegisterForm;

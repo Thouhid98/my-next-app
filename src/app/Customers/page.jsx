@@ -23,15 +23,6 @@ const Customers = () => {
     getUsers();
   }, []);
 
-  // const [customers, setCustomers] = useState([]);
-  // useEffect(() => {
-  //   getCustomers()
-  //     .then(setCustomers)
-  //     .catch((error) => console.log(error));
-  // }, []);
-
-  // console.log(customers.length);
-
   return (
     <div className="p-8 bg-black h-screen">
       <div className="flex flex-wrap gap-6">
@@ -54,5 +45,4 @@ const Customers = () => {
     </div>
   );
 };
-
 export default Customers;

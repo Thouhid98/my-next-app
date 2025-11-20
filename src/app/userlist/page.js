@@ -7,7 +7,7 @@ const UserList = () => {
   const [savedUser, setSavedUser] = useState([]);
 
   useEffect(() => {
-    const data = localStorage.getItem("loginData") || [];
+    const data = localStorage?.getItem("loginData") || [];
     if (data) {
       setSavedUser(JSON.parse(data));
     }
@@ -16,10 +16,10 @@ const UserList = () => {
   return (
     <div className="p-8 bg-black pl-20 h-screen">
       <div className="flex flex-wrap gap-6">
-        {savedUser.map((customer) => (
+        {savedUser?.map((customer) => (
           <Card key={customer.name} className="w-64">
             <CardHeader
-              className="text-2xl text-amber-900  font-bold ml-10 
+              className="text-2xl text-amber-900  font-bold  -mb-4
             "
             >
               {customer.name}

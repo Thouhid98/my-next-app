@@ -38,13 +38,12 @@ const LoginForm = () => {
     <div className="w-full">
       <div>
         <Navbar />
-        <div className="flex gap-8 justify-center items-center h-screen">
-          <div className=""></div>
-          <div className="border lg:w-[500px] rounded-lg p-12 h-[450px]">
-            <h2 className="text-4xl text-center my-4 text-[#444444] font-bold">
+        <div className="flex gap-8 justify-center items-center h-screen ">
+          <div className="border lg:w-[500px] rounded-lg p-12 h-[450px] shadow-xl shadow-[#0cee97]">
+            <h2 className="text-4xl text-center my-4 text-[#0cee97] font-bold">
               Login
             </h2>
-            <div className="mt-10">
+            <div className="mt-10 flex flex-col justify-center items-center">
               <form onSubmit={handleLogin}>
                 <div className="form-control mt">
                   <label className="label">
@@ -56,7 +55,7 @@ const LoginForm = () => {
                     type="email"
                     name="email"
                     placeholder="email"
-                    className="input input-bordered border border-rose-100 rounded p-1 ml-9"
+                    className="input input-bordered border border-rose-100 rounded p-1 ml-[38px]"
                     required
                   />
                 </div>

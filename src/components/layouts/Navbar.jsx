@@ -1,10 +1,4 @@
-import {
-  Navbar,
-  NavbarBrand,
-  NavbarContent,
-  NavbarItem,
-  Button,
-} from "@heroui/react";
+import { Navbar, NavbarBrand, NavbarContent, NavbarItem } from "@heroui/react";
 import NextLink from "next/link";
 export const AcmeLogo = () => {
   return (
@@ -28,20 +22,26 @@ export default function App() {
       </NavbarBrand>
 
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
-        <NavbarItem>
+        {/* <NavbarItem>
           <NextLink href="/Features">Features</NextLink>
+        </NavbarItem> */}
+
+        <NavbarItem>
+          <NextLink className="text-blue-600" href="/users">
+            Users
+          </NextLink>
         </NavbarItem>
 
         <NavbarItem>
-          <NextLink href="/Customers">Customers</NextLink>
+          <NextLink className="text-blue-600" href="/userlist">
+            Userlist
+          </NextLink>
         </NavbarItem>
 
         <NavbarItem>
-          <NextLink href="/userlist">Userlist</NextLink>
-        </NavbarItem>
-
-        <NavbarItem>
-          <NextLink href="/Intigrations">Intigrations</NextLink>
+          <NextLink className="text-blue-600" href="/posts">
+            Posts
+          </NextLink>
         </NavbarItem>
       </NavbarContent>
 
